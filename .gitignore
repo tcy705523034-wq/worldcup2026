@@ -1,0 +1,16 @@
+# WorkBuddy config
+.workbuddy/
+
+# Images and temp files
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.txt
+*.md
+
+# System files
+.DS_Store
+Thumbs.db
