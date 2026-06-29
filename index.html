@@ -1173,8 +1173,9 @@ function getEffectiveELO(code){
 
 function getGroupStandings(groupCode){
   const teams=GROUPS[groupCode].map(code=>({code,pts:0,gf:0,ga:0,gd:0,played:0,w:0,d:0,l:0}));
-  MATCHES.filter(m=>TEAMS[m.home].group===groupCode&&m.status==='done').forEach(m=>{
+  MATCHES.filter(m=>TEAMS[m.home]&&TEAMS[m.home].group===groupCode&&m.status==='done'&&m.round<=3).forEach(m=>{
     const h=teams.find(t=>t.code===m.home),a=teams.find(t=>t.code===m.away);
+    if(!h||!a)return;
     h.played++;a.played++;h.gf+=m.gh;h.ga+=m.ga;a.gf+=m.ga;a.ga+=m.gh;
     if(m.gh>m.ga){h.pts+=3;h.w++;a.l++;}else if(m.gh<m.ga){a.pts+=3;a.w++;h.l++;}else{h.pts+=1;a.pts+=1;h.d++;a.d++;}
   });
